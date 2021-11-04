@@ -2,5 +2,6 @@ name: Service
 host: localhost
 port: 9000
 functions:
-  - name: Noise
-  - name: MockDB
+  - name: Noise-1
+  - name: Noise-2
+  - name: Noise-3

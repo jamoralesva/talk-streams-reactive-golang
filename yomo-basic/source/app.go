@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/yomorun/yomo"
-	"github.com/yomorun/yomo/pkg/logger"
 )
 
 type noiseData struct {
@@ -22,26 +21,19 @@ func main() {
 	source := yomo.NewSource("yomo-source", yomo.WithZipperAddr("localhost:9000"))
 	err := source.Connect()
 	if err != nil {
-		logger.Printf("[source] ❌ Emit the data to YoMo-Zipper failure with err: %v", err)
+		log.Printf("❌ Emit the data to YoMo-Zipper failure with err: %v", err)
 		return
 	}
 
+	source.SetDataTag(0x10)
+
 	defer source.Close()
 
-	source.SetDataTag(0x33)
-
 	// generate mock data and send it to YoMo-Zipper in every 100 ms.
-	err = generateAndSendData(source)
-	if err != nil {
-		logger.Printf("[source] >>>> ERR >>>> %v", err)
-		os.Exit(1)
-	}
-	select {}
+	generateAndSendData(source)
 }
 
-// var codec = y3.NewCodec(0x10)
-
-func generateAndSendData(stream yomo.Source) error {
+func generateAndSendData(source yomo.Source) {
 	for {
 		// generate random data.
 		data := noiseData{
@@ -50,25 +42,20 @@ func generateAndSendData(stream yomo.Source) error {
 			From:  "localhost",
 		}
 
-		//// Encode data via Y3 codec https://github.com/yomorun/y3-codec.
-		// sendingBuf, _ := codec.Marshal(data)
-		sendingBuf, err := json.Marshal(&data)
+		sendingBuf, err := json.Marshal(data)
 		if err != nil {
 			log.Fatalln(err)
 			os.Exit(-1)
 		}
 
 		// send data via QUIC stream.
-		_, err = stream.Write(sendingBuf)
+		_, err = source.Write(sendingBuf)
 		if err != nil {
-			logger.Printf("[source] ❌ Emit %v to YoMo-Zipper failure with err: %v", data, err)
-			time.Sleep(300 * time.Millisecond)
-			continue
-
+			log.Printf("❌ Emit %v to YoMo-Zipper failure with err: %v", data, err)
 		} else {
-			logger.Printf("[source] ✅ Emit %v to YoMo-Zipper", data)
+			log.Printf("✅ Emit %v to YoMo-Zipper", data)
 		}
 
-		time.Sleep(300 * time.Millisecond)
+		time.Sleep(5000 * time.Millisecond)
 	}
 }
