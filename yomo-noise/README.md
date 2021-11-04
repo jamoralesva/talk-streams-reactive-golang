@@ -16,13 +16,13 @@ Basado en el ejemplo: https://github.com/yomorun/yomo/tree/master/example/multi-
 
 Ir a [YoMo Getting Started](https://github.com/yomorun/yomo#1-install-cli) para mas detalles.
 
-### 2. Ejecutar YoMo-Zipper
+### 2. Ejecute YoMo-Zipper
 
 ```
 yomo serve -c ./zipper/workflow.yml
 ```
 
-## 3. Ejecutar las funciones
+### 3. Ejecute las funciones
 
 ```
 go run ./stream-fn-1/app.go -n Noise-1
@@ -34,4 +34,10 @@ go run ./stream-fn-2/app.go -n Noise-2
 
 ```
 go run ./stream-fn-3/app.go -n Noise-3
+```
+
+### 4. Ejecute la fuente de datos (_source_)
+
+```
+go run ./source/app.go 
 ```
