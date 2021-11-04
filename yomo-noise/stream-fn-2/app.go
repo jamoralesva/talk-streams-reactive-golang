@@ -12,10 +12,10 @@ import (
 	"github.com/yomorun/yomo/pkg/logger"
 )
 
-// ThresholdSingleValue is the threshold of a single value.
+// Umbral a un valor
 const ThresholdSingleValue = 16
 
-// Print every value and alert for value greater than ThresholdSingleValue
+// Se puede usar el operador '_' para nombrar parametros que se van a ignorar en el cuerpo de la función.
 var computePeek = func(_ context.Context, value float32) (float32, error) {
 	fmt.Printf("✅ receive noise value: %f\n", value)
 
@@ -27,8 +27,7 @@ var computePeek = func(_ context.Context, value float32) (float32, error) {
 	return value, nil
 }
 
-// main will observe data with SeqID=0x14, and tranform to SeqID=0x15 with Noise value
-// to downstream sfn.
+// main observara datos con SeqID=0x14, los transforma y pone el valor de Noise en SeqID=0x15.
 func main() {
 	sfn := yomo.NewStreamFunction("Noise-2", yomo.WithZipperAddr("localhost:9000"))
 	defer sfn.Close()

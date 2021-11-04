@@ -1,4 +1,4 @@
-# YoMo Basic
+# YoMo Noise
 
 Basado en el ejemplo: https://github.com/yomorun/yomo/tree/master/example/multi-stream-fn
 
