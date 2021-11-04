@@ -25,7 +25,7 @@ Proyecto para presentación en el guild de Golang donde se repasa el uso de stre
 
 El objetivo de este repo es servir de tutorial para todos aquellos que quieran explorar el uso de streams y programación funcional reactiva para resolver problemas de procesamiento de datos en tiempo real usando golang.
 
-- Existe una presentación asociada a este repo que la puede encontrar 👉[aquí](TODO)
+- Existe una presentación asociada a este repo que la puede encontrar 👉[aquí](./doc/assets/presentacion.pdf)
 - Cualquier sugerencia ó critica con mucho gusto será bien recibida: 📧 [ja.moralesv@hotmail.com](mailto:ja.moralesv@hotmail.com).
 
 ## Motivación
@@ -93,9 +93,13 @@ Debido a restricciones de energia se evitará usar microcontroladores potentes, 
 
 De acuerdo a las consideraciones anteriores, se propone la siguiente estructura para la prueba de concepto:
 
-![noide-alto-nivel](./doc/assets/noise-alto-nivel.png)
+![noise-alto-nivel](./doc/assets/noise-alto-nivel.png)
 
 Para mas ejecutar el demo puede referirse al proyecto [yomo-noise](./yomo-noise/README.md).
+
+Puede ver el detalle de la función que implementa el filtro de media móvil:
+
+![explicacion-stream-fn-3](./doc/assets/explicacion-stream-fn-3.png)
 
 ### Reto abierto
 
